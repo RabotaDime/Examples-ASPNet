@@ -8,42 +8,122 @@
 
 .FileManagerBlocks
 {
-
+    width: 100%;
+    margin: auto;
 }
 
 
 
 .FileManagerAddressBar
 {
-
+    border: 1px solid red;
 }
 
 
 
 .FileManagerToolbar
 {
-
+    border: 1px solid red;
 }
 
 
 
 .FileManagerDirTree
 {
+    border: 1px solid gold;
 
+    display: block;
+    position: relative;
+    float: left;
+
+    width: 25%;
+/*
+    left: 0;
+    right: 25%;
+    margin-left: 0;
+    margin-right: 75%;
+*/
 }
-
 
 
 .FileManagerFileList
 {
+    border: 1px solid lime;
 
+    display: block;
+    position: relative;
+    float: left;
+
+    width: 75%;
+/*
+    left: 25%;
+    right: 0;
+    margin-left: 25%;
+    margin-right: 0;
+*/
 }
 
 
 
 .FileManagerInfo
 {
+    border: 1px solid cyan;
 
 }
 
+
+.ClearFix
+{
+    clear: both;
+}
+
+
+
+.FMControl_CDirTreeList.MainContainer
+{
+    border: 2px dotted violet;
+}
+
+.FMControl_CDirTreeList.UpperContainer
+{
+    display: block;
+    width: 100%;
+    margin: auto;
+}
+
+.FMControl_CDirTreeList.MiddleContainer
+{
+
+}
+
+.FMControl_CDirTreeList.DirToggleIcon
+{
+    background-color: pink;
+
+    display: block;
+    float: left;
+
+    width: 30px;
+    height: 30px;
+}
+
+.FMControl_CDirTreeList.DirNameBlock
+{
+    float: left;
+}
+
+.FMControl_CDirTreeList.DirListContainer
+{
+    border: 2px dashed red;
+
+    padding: 0px;
+    padding-left: 5%;
+}
+
+.FMControl_CDirTreeList.DirList
+{
+    border: 2px solid green;
+
+    padding: 0px;
+}
 
