@@ -1,0 +1,94 @@
+﻿@using Examples_ASPNet.DBPayments
+
+
+@helper MakeViewTypeLink (bool aIsActive, string aTitle, string aSubAddress) {
+    string LinkClass    = aIsActive ? "ActiveLink" : "DisabledLink";
+    string LinkTag      = aIsActive ? "a" : "span";
+
+    ///   Создание кода ссылки. 
+    @Html.Raw(String.Format
+    (
+        "<{0} href=\"{1}\" class=\"PaymentsTitleLink {2}\"><span>{3}</span></{0}>",
+        /* 0 */ LinkTag,
+        /* 1 */ aSubAddress,
+        /* 2 */ LinkClass,
+        /* 3 */ aTitle
+    ))
+}
+
+
+@helper MakeTitleLink (BonusesViewParams aViewParams) {
+    ///   Создание кода переключаемых ссылок для заголовка страницы. 
+    @Html.Raw("<h1>Просмотр бонусов у&nbsp;")
+    @MakeViewTypeLink(
+        aViewParams.ViewType.ParamValue != BonusesViewType.ForEmployees,
+        "сотрудников",
+        "/dbpayments/bonuses/?" +
+            ///   Создаем параметр, указывающий на вывод информации для бонусов по сотрудникам. 
+            aViewParams.ViewType.MakeStringFor(BonusesViewType.ForEmployees) + "&" +
+			///   Для просмотра бонусов о сотрудниках этот параметр не нужен, но нам
+			///   важно сохранить его для пользователя. 
+            aViewParams.ReportBonusSum.MakeString()
+    )
+    @Html.Raw(" и&nbsp;")
+    @MakeViewTypeLink(
+        aViewParams.ViewType.ParamValue != BonusesViewType.ByDepartments,
+        "отделов",
+        "/dbpayments/bonuses/?" +
+            ///   Создаем параметр, указывающий на вывод информации для всех отделов. 
+            aViewParams.ViewType        .MakeStringFor(BonusesViewType.ByDepartments) + "&" + 
+            ///   Далее добавляем параметр, указывающий уже введенную (текущую) сумму
+			///   для обрезки данных при выводе бонусов по всем отделам. 
+            aViewParams.ReportBonusSum  .MakeString()
+    )
+    @Html.Raw("</h1>")
+}
+
+
+@{
+    ViewBag.Title = "Просмотр бонусов у сотрудников и отделов";
+
+
+    ///   Получаем параметры страницы [ViewType], [ReportSum].
+    ///   Для обработки параметров я написал небольшой набор вспомогательных классов, потому что мне так привычнее.
+    BonusesViewParams ThisViewParams = new BonusesViewParams(Request);
+}
+
+@MakeTitleLink(ThisViewParams)
+
+@{
+    if (ThisViewParams.ViewType.ParamValue == BonusesViewType.ByDepartments)
+    {
+        using (Html.BeginForm(null, null, FormMethod.Get, new { @action = "/dbpayments/bonuses/" }))
+        {
+            @Html.Hidden(ThisViewParams.ViewType.ParamID, ThisViewParams.ViewType.GetValueFor(BonusesViewType.ByDepartments))
+            <div class="form-horizontal">
+                <hr />
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td class="FormFieldPadding">Минимальная сумма по отделам:</td>
+                            <td class="FormFieldPadding"><input id="@ThisViewParams.ReportBonusSum.ParamID" name="@ThisViewParams.ReportBonusSum.ParamID" value="@ThisViewParams.ReportBonusSum.GetValue()" /></td>
+                            <td class="FormFieldPadding"><input type="submit" value="Применить" class="btn btn-default" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />
+            </div>
+        }
+    }
+}
+
+
+@if (ThisViewParams.ViewType.ParamValue == BonusesViewType.ForEmployees) {
+    Html.RenderAction("Partial_BonusesForEmployees_LINQ");
+    //Html.RenderAction("Partial_BonusesForEmployees_GRP_LINQ");
+    //Html.RenderAction("Partial_BonusesForEmployees_SQL");
+}
+else
+{
+    Html.RenderAction("Partial_BonusesByDepartments_LINQ");
+    //Html.RenderAction("Partial_BonusesByDepartments_GRP_LINQ");
+    //Html.RenderAction("Partial_BonusesByDepartments_SQL");
+}
+

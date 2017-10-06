@@ -1,0 +1,93 @@
+﻿@model Examples_ASPNet.Models.DepartmentsListOfEmployees
+
+
+@helper EmployeeEditBlock (int aEmployeeID)
+{
+    <div class="PaymentsTable EditBlock">
+        @Html.ActionLink("Правка"       , "EmployeeEdit"        , new { id = aEmployeeID }) |
+        @Html.ActionLink("Обзор"        , "EmployeeDetails"     , new { id = aEmployeeID }) |
+        @Html.ActionLink("Удалить"      , "EmployeeDelete"      , new { id = aEmployeeID })
+    </div>
+}
+
+
+@{
+    int RecordsCount = (Model != null) ? Model.EmployeesTotalCount : -1;
+    string RecordsCountTitle = (RecordsCount >= 0) ? "(" + RecordsCount + ")" : "(нет записей)";
+}
+
+@*
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+*@
+
+    <div class="RecordsTableTitleBlock"><h4>Все сотрудники по отделам @RecordsCountTitle</h4></div>
+
+<table class="table PaymentsTable">
+    @if (Model != null)
+    {
+        foreach (int DepartmentID in Model.DepartmentsOrderedByNames)
+        {
+            var AssocList = (List<Examples_ASPNet.Models.Employee>) Model.DepartmentsArray[DepartmentID];
+
+            <tr>
+                <th colspan="4">
+@{
+                    int EmployeesCount = (AssocList != null) ? AssocList.Count : -1;
+                    string EmployeesCountTitle = (EmployeesCount >= 0) ? "(" + EmployeesCount + ")" : "(нет записей)";
+}
+                    @Model.DepartmentsNames[DepartmentID] @EmployeesCountTitle
+                </th>
+            </tr>
+            foreach (var E in AssocList)
+            {
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => E.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => E.DepartmentID)
+                    </td>
+                    <td>
+                        @EmployeeEditBlock(E.EmployeeID)
+                    </td>
+                </tr>
+}
+        }
+
+        <tr>
+            <th colspan="4">
+@{
+                int EmployeesCount2 = ((Model != null) && (Model.EmployeesWithoutDepartment != null)) ? Model.EmployeesWithoutDepartment.Count : -1;
+                string EmployeesCountTitle2 = (EmployeesCount2 >= 0) ? "(" + EmployeesCount2 + ")" : "(нет записей)";
+}
+                Сотрудники, не привязанные к отделам @EmployeesCountTitle2
+            </th>
+        </tr>
+
+        foreach (Examples_ASPNet.Models.Employee E in Model.EmployeesWithoutDepartment)
+        {
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    @Html.DisplayFor(modelItem => E.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => E.DepartmentID)
+                </td>
+                <td>
+                    @EmployeeEditBlock(E.EmployeeID)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <th colspan="3"><i>Нет записей</i></th>
+        </tr>
+    }
+
+</table>

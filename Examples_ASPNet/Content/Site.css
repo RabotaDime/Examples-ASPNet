@@ -1,0 +1,87 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+table.PaymentsTable > tr:first-child > th:first-child { 
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    background: red;
+}
+
+
+div.RecordsTableTitleBlock
+{
+    border-bottom: 1px solid dimgray;
+    padding: 10px 0;
+}
+
+
+tr div.PaymentsTable.EditBlock
+{
+    visibility: hidden;
+}
+
+
+tr:hover div.PaymentsTable.EditBlock
+{
+    visibility: visible;
+}
+
+
+div.PaymentsTable.EditBlock
+{
+    cursor: pointer;
+}
+
+
+.PaymentsTitleLink.DisabledLink
+{
+    background-color: lightgrey;
+    border-radius: 4px 4px;
+    color: black;
+    padding: 0 2px;
+    text-decoration: none;
+}
+
+.PaymentsTitleLink.ActiveLink
+{
+    background-color: transparent;
+    border-radius: 4px 4px;
+    color: steelblue;
+    padding: 0 2px;
+    text-decoration: none;
+    border-bottom: 1px dotted black;
+}
+
+.PaymentsTitleLink.ActiveLink:hover,
+.PaymentsTitleLink.ActiveLink:active
+{
+    color: red;
+}
+
+
+.MainTitle:hover,
+.MainTitle:active
+{
+    text-decoration: underline !important;
+}
+
+
+.FormFieldPadding
+{
+    padding: 5px;
+}

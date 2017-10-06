@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Examples_ASPNet.Models.Department>
+
+
+@helper DepartmentEditBlock (int aDepartmentID)
+{
+    <div class="PaymentsTable EditBlock">
+        @Html.ActionLink("Правка"       , "DepartmentEdit"        , new { id = aDepartmentID }) |
+        @Html.ActionLink("Обзор"        , "DepartmentDetails"     , new { id = aDepartmentID }) |
+        @Html.ActionLink("Удалить"      , "DepartmentDelete"      , new { id = aDepartmentID })
+    </div>
+}
+
+
+@{
+    int RecordsCount = (Model != null) ? Model.Count() : -1;
+    string RecordsCountTitle = (RecordsCount >= 0) ? "(" + RecordsCount + ")" : "(нет записей)";
+}
+
+<div class="RecordsTableTitleBlock"><h4>Все отделы по алфавиту @RecordsCountTitle</h4></div>
+
+@*
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+*@
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null) { foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @DepartmentEditBlock(item.DepartmentID)
+        </td>
+    </tr>
+    }} else {
+        <tr>
+            <th colspan="1"><i>Нет записей</i></th>
+        </tr>
+    }
+
+</table>
