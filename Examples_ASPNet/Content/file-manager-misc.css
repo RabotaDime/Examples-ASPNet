@@ -1,0 +1,425 @@
+﻿
+
+.FileManagerContainer
+{
+}
+
+
+
+.FileManagerBlocks
+{
+    width: 100%;
+    margin: auto;
+}
+
+
+
+.FileManagerAddressBar
+{
+    border: 1px solid red;
+}
+
+
+
+.FileManagerToolbar
+{
+    border: 1px solid red;
+}
+
+
+
+.FileManagerDirTree
+{
+    border: 1px solid gold;
+
+    display: block;
+    position: relative;
+    float: left;
+
+    width: 30%;
+/*
+    left: 0;
+    right: 25%;
+    margin-left: 0;
+    margin-right: 75%;
+*/
+}
+
+
+.FileManagerFileList
+{
+    border: 1px solid lime;
+
+    display: block;
+    position: relative;
+    float: left;
+
+    width: 70%;
+/*
+    left: 25%;
+    right: 0;
+    margin-left: 25%;
+    margin-right: 0;
+*/
+}
+
+
+
+.FileManagerInfo
+{
+    border: 1px solid cyan;
+
+}
+
+
+.ClearFix
+{
+    clear: both;
+}
+
+
+
+.FMControl_PathContainer
+{
+    width: 100%;
+    margin: auto;
+}
+
+.FMControl_PathItem
+{
+    float: left;
+
+    cursor: pointer;
+
+    border: 1px solid white;
+}
+
+.FMControl_PathItem.Root,
+.FMControl_PathItem.Folder
+
+{
+    padding: 2px 2px;
+}
+
+.FMControl_PathItem.Separator
+{
+    padding: 2px 2px;
+    font-size: 16px;
+    color: lightgray;
+}
+
+.FMControl_PathItem.Folder:active,
+.FMControl_PathItem.Folder:hover,
+.FMControl_PathItem.Root:active,
+.FMControl_PathItem.Root:hover
+{
+    background-color: #e5f3fb;
+    border: 1px solid #70c0e7;
+}
+
+
+
+
+.FMControlDirTree
+{
+    overflow-y: scroll;
+}
+
+
+
+
+.FMControl_CDirTreeList.MainContainer
+{
+/*  
+    border: 2px dotted violet;
+*/
+}
+
+.FMControl_CDirTreeList.UpperContainer
+{
+    display: block;
+
+    width: 100%;
+    margin: auto;
+
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.FMControl_CDirTreeList.UpperContainer:active,
+.FMControl_CDirTreeList.UpperContainer:hover
+{
+    background-color: #e5f3fb;
+    border: 1px solid #70c0e7;
+}
+
+.FMControl_CDirTreeList.UpperContainer:hover > .FMControl_CDirTreeList.DirToggleIcon
+{
+    background-image: url('/Content/i/file-manager/icon-3-tree-arrow-closed.png');
+}
+
+.FMControl_CDirTreeList.MiddleContainer
+{
+
+}
+
+.FMControl_CDirTreeList.IconSize
+{
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.FMControl_CDirTreeList.DirToggleIcon
+{
+    background-color: transparent;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('/Content/i/file-manager/icon-2-tree-arrow-open.png');
+
+    display: block;
+    float: left;
+    width: 22px;
+    height: 22px;
+}
+
+.IconOpened 
+{
+}
+
+.IconClosed
+{
+}
+
+.FMControl_CDirTreeList.DirFolderIcon
+{
+    background-color: transparent;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('/Content/i/file-manager/icon-1-folder-normal.png');
+
+    display: block;
+    float: left;
+    width: 22px;
+    height: 22px;
+}
+
+.FMControl_CDirTreeList.DirNameBlock
+{
+/*
+    float: left;
+*/  
+    display: table-cell;
+}
+
+.FMControl_CDirTreeList.DirName
+{
+    padding: 2px 4px;
+    display: inline-block;
+}
+
+.FMControl_CDirTreeList.DirListContainer
+{
+/*
+    border: 2px dashed red;
+*/
+
+    padding: 0px;
+    padding-left: 5%;
+}
+
+.FMControl_CDirTreeList.DirList
+{
+/*
+    border: 2px solid green;
+*/
+
+    padding: 0px;
+}
+
+
+
+
+
+
+
+.FMControl_CFileList.ListContainer
+{
+
+}
+
+.FMControl_CFileList.ListItems
+{
+
+}
+
+.FMControl_CFileList.ListItems.ViewTypeTable
+{
+
+}
+
+.FMControl_CFileList.ListItems.ViewTypeIcons
+{
+
+}
+
+.FMControl_CFileList.Item
+{
+    cursor: pointer;
+
+    background-color: white;
+    border: 1px solid white;
+
+    width: 100%;
+}
+
+.FMControl_CFileList.Item:active,
+.FMControl_CFileList.Item:hover
+{
+    background-color: #e5f3fb;
+    border: 1px solid #70c0e7;
+}
+
+.FMControl_CFileList.Item.Folder
+{
+}
+
+.FMControl_CFileList.Item.File
+{
+
+}
+
+.FMControl_CFileList.Item.ImageFile
+{
+
+}
+
+
+
+.FMControl_CFileItem
+{
+    height: 22px;
+
+    border: 1px solid black;
+}
+
+.FMControl_CFileItem.IconNamePair
+{
+    float: left;
+    width: 20%;
+    margin: auto;
+
+    display: table-row;
+}
+
+.FMControl_CFileItem.InfoSet
+{
+    float: right;
+    width: 80%;
+    margin: auto;
+}
+
+.FMControl_CFileItem.Icon
+{
+    width: 22px;
+    height: 22px;
+
+    display: table-cell;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('/Content/i/file-manager/icon-1-folder-normal.png');
+}
+
+.FMControl_CFileItem.Name
+{
+    display: table-cell;
+
+    padding: 2px 2px 10px 2px;
+}
+
+.FMControl_CFileItem.InfoSize
+{
+    float: left;
+    width: 120px;
+}
+
+.FMControl_CFileItem.InfoDateTime
+{
+    float: left;
+    width: 120px;
+}
+
+.FMControl_CFileItem.InfoRights
+{
+    float: left;
+    width: 120px;
+}
+
+.FMControl_CFileItem.InfoOwner
+{
+    float: left;
+    width: 120px;
+}
+
+
+
+.FM_CFileListItem.Container
+{
+    display: block;
+    width: 100%;
+}
+
+.FM_CFileListItem.LeftBlock
+{
+     display: table-cell;
+}
+
+.FM_CFileListItem.RightBlock
+{
+     display: table-cell;
+}
+
+.FM_CFileListItem.SubContainer
+{
+     display: block;
+     width: 100%;
+}
+
+.FM_CFileListItem.Icon
+{
+    display: table-cell;
+}
+
+.FM_CFileListItem.Name
+{
+    display: table-cell;
+    min-width: 120px;
+}
+
+.FM_CFileListItem.InfoSize
+{
+    display: table-cell;
+    min-width: 120px;
+}
+
+.FM_CFileListItem.InfoDateTime
+{
+    display: table-cell;
+    min-width: 120px;
+}
+
+.FM_CFileListItem.InfoFlags
+{
+    display: table-cell;
+    min-width: 120px;
+}
+
+.FM_CFileListItem.InfoOwner
+{
+    display: table-cell;
+    min-width: 120px;
+}
+

@@ -126,10 +126,17 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\FileManager.css" />
-    <Content Include="Content\JS\BackgroundWorker.js" />
-    <Content Include="Content\JS\Utils.js" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\file-manager-filelist.css" />
+    <Content Include="Content\file-manager-misc.css" />
+    <Content Include="Content\i\file-manager\icon-1-folder-normal.png" />
+    <Content Include="Content\i\file-manager\icon-2-tree-arrow-open.png" />
+    <Content Include="Content\i\file-manager\icon-3-tree-arrow-closed.png" />
+    <Content Include="Content\i\file-manager\icon-4-file-other.png" />
+    <Content Include="Content\i\file-manager\icon-5-file-image.png" />
+    <Content Include="Content\js\BackgroundWorker.js" />
+    <Content Include="Content\js\Utils.js" />
+    <Content Include="Content\layout-div-utils.css" />
+    <Content Include="Content\site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\PaymentsDataModel.Context.tt">

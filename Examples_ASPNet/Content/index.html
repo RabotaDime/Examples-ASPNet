@@ -1,0 +1,794 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+<style>
+
+/*
+body
+{
+    min-width: 700px;
+    max-width: 1000px;
+}
+*/
+
+h2
+{
+    margin: 35px auto auto auto;
+}
+
+.Square
+{
+    width: 75px;
+    height: 75px;
+}
+
+.DottedBorder
+{
+    border: 2px dashed gold;
+}
+
+.FilledBackground
+{
+
+}
+
+.Static > .Container
+{
+    display: block;
+    position: static;
+
+    vertical-align: top;
+}
+
+.Static > .Container > .Item
+{
+    display: inline-block;
+    position: static;
+    background-color: orange;
+}
+
+.Static > .Container > #HeyLookIamDifferent
+{
+    position: static;
+    left: -10px;
+    top: 10px;
+    background-color: red;
+}
+
+.Relative > .Container
+{
+    display: block;
+    position: static;
+    border: 2px dashed gold;
+
+    vertical-align: top;
+}
+
+.Relative > .Container > .Item
+{
+    display: inline-block;
+    position: static;
+    background-color: orange;
+}
+
+.Relative > .Container > #HeyLookIamDifferent
+{
+    position: relative;
+    left: -10px;
+    top: 10px;
+    background-color: red;
+}
+
+.StaticFloatLeft > .Container
+{
+    display: block;
+    position: static;
+
+    vertical-align: top;
+}
+
+.StaticFloatLeft > .Container > .Item
+{
+    display: block;
+    float: left;
+
+    position: static;
+    background-color: orange;
+}
+
+.StaticFloatLeft > .Container > #HeyLookIamDifferent
+{
+    position: static;
+    left: -10px;
+    top: 10px;
+    background-color: red;
+}
+
+.ClearFix
+{
+    clear: both;
+}
+
+.Absolute > .Container
+{
+    display: block;
+    position: static;
+
+    vertical-align: top;
+}
+
+.Absolute > .Container > .Item
+{
+    display: inline-block;
+
+    position: static;
+    background-color: orange;
+    vertical-align: top;
+}
+
+.Absolute > .Container > #HeyLookIamDifferent
+{
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    background-color: red;
+    vertical-align: top;
+}
+
+.NotStaticParent
+{
+    position: relative !important;
+    left: 0;
+    right: 0;
+}
+
+.Fixed > .Container
+{
+    display: block;
+    position: static;
+
+    vertical-align: top;
+}
+
+.Fixed > .Container > .Item
+{
+    display: inline-block;
+    position: static;
+    background-color: orange;
+
+    cursor: pointer;
+}
+
+.Fixed > .Container > #HeyLookIamDifferent
+{
+    position: fixed;
+    right: 2%;
+    top: 10px;
+    background-color: rgba(255, 0, 0, 1.0);
+    visibility: hidden;
+}
+
+.Fixed > .Container:hover > #HeyLookIamDifferent
+{
+    visibility: visible;
+}
+
+
+
+.InlineBlock
+{
+    display: inline-block;
+}
+
+.InlineBlock.ContainerBase
+{
+    width: 100%;
+    position: static;
+}
+
+.InlineBlock.ContainerParent
+{
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+.InlineBlock.ContainerItem
+{
+    position: absolute;
+}
+
+
+
+.BlockContainer
+{
+    position: relative;
+    display: block;
+
+    width: 100%;
+
+    vertical-align: top;
+}
+
+.FMFileList_Control .FMFileList.ContainerParent
+{
+    background-color: aquamarine;
+    height: 28px;
+    overflow: hidden;
+}
+
+
+
+.FloatLeftBlock
+{
+    float: left;
+}
+
+.FloatClearFix
+{
+    clear: both;
+}
+
+
+
+.Example1
+{
+    min-width: 75px;
+    width: 33.33%;
+    height: 75px;
+    background-color: lawngreen;
+    border: 1px solid green;
+}
+
+.Example2 {
+    min-width: 75px;
+    width: 33.33%;
+    height: 75px;
+    background-color: hotpink;
+    border: 1px solid green;
+}
+
+.Example3 {
+    min-width: 75px;
+    width: 33.33%;
+    height: 75px;
+    background-color: yellowgreen;
+    border: 1px solid green;
+}
+
+
+
+</style>
+
+    <link href="layout-div-utils.css" rel="stylesheet" type="text/css" />
+    <link href="file-manager.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<h1>&nbsp;</h1>
+<p>&nbsp;</p>
+
+<h1>Краткий курс HTML</h1>
+<p>Бесполезно объяснять элементарные вещи. Например, что такое теги. Или почему надо разделять CSS и JS по логике (а не по файлам). И многие другие штуки. Либо это сразу понятно, либо лучше вовсе не лезть в это.</p>
+<p>Поэтому перейдем сразу к делу. А именно, к гораздо более опасным вещам. Таким, которые кажутся простыми и понятными. И ты их упускаешь из вида. А потом долго чешешь голову, не понимая что происходит. Например, почему над заголовком тут летает красный кубик? Да черт его знает!
+<p>А также разберем чуть более сложные вещи, которые просто физически понять нельзя. Можно лишь запомнить, принять и простить.</p>
+
+<h1>Правила Layout</h1>
+<p>Главная и первая вещь, которую нужно понять о DOM/HTML разметке -- это четыре типа позиционирования у каждого элемента. Если про блочные (div) и строчные (span) элементы и так все сразу понятно по смыслу, то типы позиционирования уже выходят за рамки очевидного для мозга. И тут важно просто запомнить правила "игры".</p>
+
+
+<h2>1. Типы позиционирования</h2>
+<h2>1.1. position: static</h2>
+<p>Об этом свойстве можно забыть, или вообще не знать, или избегать его, потому что он имеет странное название, а мы такие серьезные девелоперы, что не хотим статичных элементов на своей мега-динамичной странице. Но это обычный тип позиционирования по умолчанию. По смыслу -- режим, когда нет никаких особых правил позиционирования. Если быть точнее, эти правила неизменяемы = статичны.</p>
+<p>Все смещения (left, right, top и так далее) при таком типе позиционирования <b>*не работают*</b> от слов вообще и никак.</p>
+<p>Элемент находится там, где он предполагается. Блочные занимают всю линию, строчные остаются в своей строке без каких-либо изменений.</p>
+<p>Понятное дело, что только что ты прочитал очень скучную и очень базовую информацию, которая и мифическому ежу понятна. Но именно здесь, в таких мелочах, кроется дьявол. Потом долго не кодил HTML, приходишь такой, ставишь объекту свойство "display", ставишь "left", "right" параметры, а они не работают. И ты такой, ну вот и старость пришла, и ты стал никчемным и что-то опять упустил. В общем, не надо так.</p>
+
+<div class="Static">
+<div class="Container DottedBorder">
+    <div class="Item Square">1</div>
+    <div class="Item Square">2</div>
+    <div class="Item Square">3</div>
+    <div class="Item Square">4</div>
+    <div class="Item Square">5</div>
+    <div class="Item Square" id="HeyLookIamDifferent">6</div>
+    <div class="Item Square">7</div>
+    <div class="Item Square">8</div>
+    <div class="Item Square">9</div>
+    <div class="Item Square">10</div>
+    <div class="Item Square">11</div>
+    <div class="Item Square">12</div>
+    <div class="Item Square">13</div>
+    <div class="Item Square">14</div>
+    <div class="Item Square">15</div>
+    <div class="Item Square">16</div>
+</div>
+</div>
+
+<p>Замечание: Странные пробелы между блоками -- это несовершенство кода HTML, если хочешь написать код красивым, с иерархией между тегами. Можно увидеть разницу, если вставить комментарии между пробелов в коде.</p>
+
+<div class="Static"><div class="Container DottedBorder"><!--
+ --><div class="Item Square">1</div><!--
+ --><div class="Item Square">2</div><!--
+ --><div class="Item Square">3</div><!--
+ --><div class="Item Square">4</div><!--
+ --><div class="Item Square">5</div><!--
+ --><div class="Item Square" id="HeyLookIamDifferent">6</div><!--
+ --><div class="Item Square">7</div><!--
+ --><div class="Item Square">8</div><!--
+ --><div class="Item Square">9</div><!--
+ --><div class="Item Square">10</div><!--
+ --><div class="Item Square">11</div><!--
+ --><div class="Item Square">12</div><!--
+ --><div class="Item Square">13</div><!--
+ --><div class="Item Square">14</div><!--
+ --><div class="Item Square">15</div><!--
+ --><div class="Item Square">16</div><!--
+--></div></div>
+
+
+<h2>1.2. position: relative</h2>
+<p>Относительное позиционирование -- это в точности то же самое, что и статичное. Но теперь объект, имеющий относительное позиционирование, может улетать со своего места, как привидение. Потому что свойства вроде left и right внезапно начинают работать. А отсылка именно на привидение в том, что он остается в "мире" статичных объектов, прямо таки умея двигать всякие пробки от пивных бутылок и объекты, чем очень пугает своих статичных и совершенно обычных собратьев по строке (если он инлайн, то есть по вертикали), и по странице (если он блочный, то есть по горизонтали).</p>
+
+<div class="Relative">
+<div class="Container DottedBorder">
+    <div class="Item Square">1</div>
+    <div class="Item Square">2</div>
+    <div class="Item Square">3</div>
+    <div class="Item Square">4</div>
+    <div class="Item Square">5</div>
+    <div class="Item Square" id="HeyLookIamDifferent">6 Boo!</div>
+    <div class="Item Square">7</div>
+    <div class="Item Square">8</div>
+    <div class="Item Square">9</div>
+    <div class="Item Square">10</div>
+    <div class="Item Square">11</div>
+    <div class="Item Square">12</div>
+    <div class="Item Square">13</div>
+    <div class="Item Square">14</div>
+    <div class="Item Square">15</div>
+    <div class="Item Square">16</div>
+</div>
+</div>
+
+<p>Без пробелов. Кстати, в этом коде другой более странный трюк, чтобы их "удалить":</p>
+
+<div class="Relative"><div class="Container DottedBorder"
+   ><div class="Item Square">1</div
+   ><div class="Item Square">2</div
+   ><div class="Item Square">3</div
+   ><div class="Item Square">4</div
+   ><div class="Item Square">5</div
+   ><div class="Item Square" id="HeyLookIamDifferent">6 Boo!</div
+   ><div class="Item Square">7</div
+   ><div class="Item Square">8</div
+   ><div class="Item Square">9</div
+   ><div class="Item Square">10</div
+   ><div class="Item Square">11</div
+   ><div class="Item Square">12</div
+   ><div class="Item Square">13</div
+   ><div class="Item Square">14</div
+   ><div class="Item Square">15</div
+   ><div class="Item Square">16</div
+></div></div>
+
+<p>И вот сразу одна из интересных проблем. Если попросить "привидение" отобразить более длинное слово внутри себя, оно вылетит не очень понятным образом. Интересно, почему же так происходит?</p>
+
+<div class="Relative"><div class="Container DottedBorder"
+   ><div class="Item Square">1</div
+   ><div class="Item Square">2</div
+   ><div class="Item Square">3</div
+   ><div class="Item Square">4</div
+   ><div class="Item Square">5</div
+   ><div class="Item Square" id="HeyLookIamDifferent">6 Boo! Scary?! Ho-ho-ho!</div
+   ><div class="Item Square">7</div
+   ><div class="Item Square">8</div
+   ><div class="Item Square">9</div
+   ><div class="Item Square">10</div
+   ><div class="Item Square">11</div
+   ><div class="Item Square">12</div
+   ><div class="Item Square">13</div
+   ><div class="Item Square">14</div
+   ><div class="Item Square">15</div
+   ><div class="Item Square">16</div
+></div></div>
+
+<p>Оказывается, что проблема не связана с типом позиционирования. Вот снова статический набор блоков, мы видим, что блок все равно "вылетает". Уж больно хочет выделиться:</p>
+
+<div class="Static"><div class="Container DottedBorder"
+   ><div class="Item Square">1</div
+   ><div class="Item Square">2</div
+   ><div class="Item Square">3</div
+   ><div class="Item Square">4</div
+   ><div class="Item Square">5</div
+   ><div class="Item Square" id="HeyLookIamDifferent" style="left: 0; top: 0;">6 Boo! Scary?! Ho-ho-ho!</div
+   ><div class="Item Square">7</div
+   ><div class="Item Square">8</div
+   ><div class="Item Square">9</div
+   ><div class="Item Square">10</div
+   ><div class="Item Square">11</div
+   ><div class="Item Square">12</div
+   ><div class="Item Square">13</div
+   ><div class="Item Square">14</div
+   ><div class="Item Square">15</div
+   ><div class="Item Square">16</div
+></div></div>
+
+<p>Все потому, что я установил див-блокам свойство display: inline-block, а не float: left, чтобы они выстраивались в одну линию. А свойство inline-block тоже имеет много своих дьявольских особенностей. Как и float, который надо "чистить" с помощью clear (иначе, последующие блоки начнут обтекать плавающий).</p>
+
+<div class="StaticFloatLeft"><div class="Container DottedBorder"
+   ><div class="Item Square">1</div
+   ><div class="Item Square">2</div
+   ><div class="Item Square">3</div
+   ><div class="Item Square">4</div
+   ><div class="Item Square">5</div
+   ><div class="Item Square" id="HeyLookIamDifferent" style="left: 0; top: 0;">6 Boo! Scary?! Ho-ho-ho!</div
+   ><div class="Item Square">7</div
+   ><div class="Item Square">8</div
+   ><div class="Item Square">9</div
+   ><div class="Item Square">10</div
+   ><div class="Item Square">11</div
+   ><div class="Item Square">12</div
+   ><div class="Item Square">13</div
+   ><div class="Item Square">14</div
+   ><div class="Item Square">15</div
+   ><div class="Item Square">16</div
+   ><div class="ClearFix"></div
+></div></div>
+
+<p>Но если помнить, что другие свойства, вроде vertical-align отвечают за выравнивание в строке, а не за подчиненные элементы, то можно "починить" и inline-block:</p>
+
+<div class="Static"><div class="Container DottedBorder"
+   ><div class="Item Square">1</div
+   ><div class="Item Square">2</div
+   ><div class="Item Square">3</div
+   ><div class="Item Square">4</div
+   ><div class="Item Square">5</div
+   ><div class="Item Square" id="HeyLookIamDifferent" style="vertical-align: top;">6 Boo! Scary?! Ho-ho-ho!</div
+   ><div class="Item Square">7</div
+   ><div class="Item Square">8</div
+   ><div class="Item Square">9</div
+   ><div class="Item Square">10</div
+   ><div class="Item Square">11</div
+   ><div class="Item Square">12</div
+   ><div class="Item Square">13</div
+   ><div class="Item Square">14</div
+   ><div class="Item Square">15</div
+   ><div class="Item Square">16</div
+   ><div class="ClearFix"></div
+></div></div>
+
+<p>И снова, relative блок, но "починенный" строчным выравниванием:</p>
+
+<div class="Relative"><div class="Container DottedBorder"
+   ><div class="Item Square">1</div
+   ><div class="Item Square">2</div
+   ><div class="Item Square">3</div
+   ><div class="Item Square">4</div
+   ><div class="Item Square">5</div
+   ><div class="Item Square" id="HeyLookIamDifferent" style="vertical-align: top;">6 Boo! Scary?! Ho-ho-ho! It's crazy!!! My text is sooo long. But I'm looks OK</div
+   ><div class="Item Square">7</div
+   ><div class="Item Square">8</div
+   ><div class="Item Square">9</div
+   ><div class="Item Square">10</div
+   ><div class="Item Square">11</div
+   ><div class="Item Square">12</div
+   ><div class="Item Square">13</div
+   ><div class="Item Square">14</div
+   ><div class="Item Square">15</div
+   ><div class="Item Square">16</div
+   ><div class="ClearFix"></div
+></div></div>
+
+
+<h2>1.3. position: absolute</h2>
+<p>Абсолютное позиционирование уже на что-то способно. Например, убрать красный блок из цепочки (из строки) совсем, и зафигачить его аж на верхушку страницы (помните тот красный кубик над первым заголовком?).</p>
+
+<div class="Absolute">
+<div class="Container DottedBorder">
+    <div class="Item Square">1</div>
+    <div class="Item Square">2</div>
+    <div class="Item Square">3</div>
+    <div class="Item Square">4</div>
+    <div class="Item Square">5</div>
+    <div class="Item Square" id="HeyLookIamDifferent">6 Boo!</div>
+    <div class="Item Square">7</div>
+    <div class="Item Square">8</div>
+    <div class="Item Square">9</div>
+    <div class="Item Square">10</div>
+    <div class="Item Square">11</div>
+    <div class="Item Square">12</div>
+    <div class="Item Square">13</div>
+    <div class="Item Square">14</div>
+    <div class="Item Square">15</div>
+    <div class="Item Square">16</div>
+</div>
+</div>
+
+<p>А все потому, что absolute объект ставится в позицию от первого своего родителя вверх по иерархии, у которого свойство position не равно != static. Очень очевидно (сарказм).</p>
+
+<div class="Absolute"><div class="Container NotStaticParent DottedBorder"
+   ><div class="Item Square">1</div
+   ><div class="Item Square">2</div
+   ><div class="Item Square">3</div
+   ><div class="Item Square">4</div
+   ><div class="Item Square">5</div
+   ><div class="Item Square" id="HeyLookIamDifferent">6 Теперь я не где-то вверху</div
+   ><div class="Item Square">7</div
+   ><div class="Item Square">8</div
+   ><div class="Item Square">9</div
+   ><div class="Item Square">10</div
+   ><div class="Item Square">11</div
+   ><div class="Item Square">12</div
+   ><div class="Item Square">13</div
+   ><div class="Item Square">14</div
+   ><div class="Item Square">15</div
+   ><div class="Item Square">16</div
+></div></div>
+
+
+<h2>1.4. position: fixed</h2>
+<p>Фиксированное позиционирование это четвертый и заключительный из всех основных типов позиционирования. А также второй, после static, который понятен очевидно. Он просто ставит блок относительно всей страницы, без влияния прокрутки.</p>
+<p>Чтобы увидеть работу fixed блока, наведи курсор внутрь контейнера:</p>
+
+<div class="Fixed">
+<div class="Container DottedBorder">
+    <div class="Item Square">1</div>
+    <div class="Item Square">2</div>
+    <div class="Item Square">3</div>
+    <div class="Item Square">4</div>
+    <div class="Item Square">5</div>
+    <div class="Item Square" id="HeyLookIamDifferent"><small>Shhh. Don't look. I'm a fixed flying block :)</small></div>
+    <div class="Item Square">7</div>
+    <div class="Item Square">8</div>
+    <div class="Item Square">9</div>
+    <div class="Item Square">10</div>
+    <div class="Item Square">11</div>
+    <div class="Item Square">12</div>
+    <div class="Item Square">13</div>
+    <div class="Item Square">14</div>
+    <div class="Item Square">15</div>
+    <div class="Item Square">16</div>
+</div>
+</div>
+
+
+<h2>1.5. Смысл сего повествования</h2>
+
+<p>Теперь, поняв самое важное, надо понять, почему изобрели все эти странные свойства и как с ними дальше жить. И почему же понимать, как работает свойство position важнее всех остальных?</p>
+<p>Выхода, конечно же, два. Принять, пахать и верстать. Либо альтернативный -- ждать, когда вымрут заказчики, требующие поддержку старых, древних или неумелых браузеров, чтобы спокойно использовать совершенно новые layout-техники, нежели верстать дивами, либо таблицами. То есть флекс-боксы и гриды.</p>
+
+<p>Умея расставлять приоритеты в знаниях, и умея не пропускать дьявольские детали, верстать на дивах становится проще.</p>
+
+<p>Вот пара примеров, для облегчения жизни:</p>
+
+<div style="display: block; margin-bottom: 200px;">
+
+
+<div class="FMFileList"><!--
+ --><div class="FMFileListHeader LayoutContainer"><!--
+     --><div class="FMFileListHeader LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListHeader Icon" style="background-image: none;"></div><!--
+         --><div class="FMFileListHeader Name"><span st>Имя объекта</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListHeader LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListHeader InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListHeader InfoElement InfoSize"><span>Размер</span></div><!--
+         --><div class="FMFileListHeader InfoElement InfoDate"><span>Дата изменения</span></div><!--
+         --><div class="FMFileListHeader InfoElement InfoFlags"><span>Права</span></div><!--
+         --><div class="FMFileListHeader InfoElement InfoOwner"><span>Владелец</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+ --><div class="FMFileListItem LayoutContainer"><!--
+     --><div class="FMFileListItem LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListItem Icon"></div><!--
+         --><div class="FMFileListItem Name"><span>File Name 123.png</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListItem LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListItem InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListItem InfoElement InfoSize"><span>20 КБ</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoDate"><span>09.10.2017&nbsp;17:07</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoFlags"><span>0755</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoOwner"><span>PrivetDime</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+ --><div class="FMFileListItem LayoutContainer"><!--
+     --><div class="FMFileListItem LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListItem Icon"></div><!--
+         --><div class="FMFileListItem Name"><span>File Name File Name File Name File Name File Name File Name File Name.png</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListItem LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListItem InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListItem InfoElement InfoSize"><span>20 КБ</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoDate"><span>09.10.2017&nbsp;17:07</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoFlags"><span>0755</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoOwner"><span>PrivetDime</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+ --><div class="FMFileListItem LayoutContainer"><!--
+     --><div class="FMFileListItem LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListItem Icon"></div><!--
+         --><div class="FMFileListItem Name"><span>Новый файл 1.png</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListItem LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListItem InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListItem InfoElement InfoSize"><span>20 КБ</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoDate"><span>09.10.2017&nbsp;17:07</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoFlags"><span>0755</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoOwner"><span>PrivetDime</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+--></div>
+
+
+<div class="FMFileList"><!--
+ --><div class="FMFileListHeader LayoutContainer"><!--
+     --><div class="FMFileListHeader LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListHeader Icon" style="background-image: none;"></div><!--
+         --><div class="FMFileListHeader Name"><span st>Имя объекта</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListHeader LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListHeader InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListHeader InfoElement InfoSize"><span>Размер</span></div><!--
+         --><div class="FMFileListHeader InfoElement InfoDate"><span>Дата изменения</span></div><!--
+         --><div class="FMFileListHeader InfoElement InfoFlags"><span>Права</span></div><!--
+         --><div class="FMFileListHeader InfoElement InfoOwner"><span>Владелец</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+ --><hr class="FMFileListHeader" /><!--
+ --><div class="FMFileListItem LayoutContainer"><!--
+     --><div class="FMFileListItem LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListItem Icon"></div><!--
+         --><div class="FMFileListItem Name"><span>File Name 123.png</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListItem LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListItem InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListItem InfoElement InfoSize"><span>20 КБ</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoDate"><span>09.10.2017&nbsp;17:07</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoFlags"><span>0755</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoOwner"><span>PrivetDime</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+ --><div class="FMFileListItem LayoutContainer"><!--
+     --><div class="FMFileListItem LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListItem Icon"></div><!--
+         --><div class="FMFileListItem Name"><span>File Name File Name File Name File Name File Name File Name File Name.png</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListItem LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListItem InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListItem InfoElement InfoSize"><span>1023 MБ</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoDate"><span>09.10.2017&nbsp;17:07</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoFlags"><span>0755</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoOwner"><span>PrivetDime</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+ --><div class="FMFileListItem LayoutContainer"><!--
+     --><div class="FMFileListItem LayoutElement IconNameGroup"><!--
+         --><div class="FMFileListItem Icon"></div><!--
+         --><div class="FMFileListItem Name"><span>Новый файл 1.png</span></div><!--
+         --><div class="LayoutClear"></div><!--
+     --></div><!--
+     --><div class="FMFileListItem LayoutElement DetailsGroup"><!--
+         --><div class="FMFileListItem InfoElement InfoGradientIcon"></div><!--
+         --><div class="FMFileListItem InfoElement InfoSize"><span>20 КБ</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoDate"><span>09.10.2017&nbsp;17:07</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoFlags"><span>0755</span></div><!--
+         --><div class="FMFileListItem InfoElement InfoOwner"><span>PrivetDime</span></div><!--
+         --></div><!--
+     --><div class="LayoutClear"></div><!--
+ --></div><!--
+--></div>
+
+
+</div>
+
+<div class="FMFileList_Control">
+<div class="FMFileListItem ContainerParent BlockContainer" style="position: relative; display: block; width: 100%; vertical-align: top;"
+    ><div class="FMFileListItem ContainerItem" style="position: absolute; display: block; left: 0; width: 40%; border: 1px solid red;"
+       ><div class="FMFileListItem ContainerParent" style="background-color: rgba(180, 228, 133, 0.37); display: inline-block; vertical-align: text-bottom; height: 25px; white-space: nowrap; text-overflow: ellipsis;"
+           ><div class="FMFileListItem ContainerItem Icon" style="display: block; float: left; width: 20px; height: 20px; background-color: red; padding: 0; margin: 2px; vertical-align: middle;"></div
+           ><div class="FMFileListItem ContainerItem Name" style="margin: 5px; vertical-align: top; font-size: 17pt; text-overflow: ellipsis; white-space: nowrap;">File Name File Name File Name File Name.png</div
+       ></div
+    ></div
+></div>
+</div>
+
+<div class="FMFileList_Control">
+<div class="FMFileList ContainerParent BlockContainer" style="position: relative; display: block; width: 100%; vertical-align: top;"
+    ><div style="position: absolute; display: block; left: 0; width: 40%; border: 1px solid red;"
+       ><div style="background-color: rgba(180, 228, 133, 0.37); display: inline-block; vertical-align: text-bottom; height: 25px; white-space: nowrap; text-overflow: ellipsis;"
+           ><span style="display: block; float: left; width: 20px; height: 20px; background-color: red; padding: 0; margin: 2px; vertical-align: middle;"></span
+           ><span style="margin: 5px; vertical-align: top; font-size: 17pt; text-overflow: ellipsis; white-space: nowrap;">File Name File Name File Name File Name.png</span
+       ></div
+    ></div
+></div>
+</div>
+
+<div class="FMFileList_Control">
+<div class="FMFileList ContainerParent BlockContainer" style="position: relative; display: block; width: 100%; vertical-align: top;"
+   ><div style="position: absolute; display: block; left: 0; width: 40%; border: 1px solid red;"
+       ><span style="background-color: rgba(180, 228, 133, 0.37); display: table-cell;"><span style="display: inline-block; width: 20px; height: 20px; background-color: red;"></span><span style="padding: 5px;">File Name File Name File Name File Name.png</span></span
+   ></div
+></div>
+</div>
+
+<div class="FMFileList_Control">
+<div class="FMFileList ContainerParent BlockContainer" style="position: relative; display: block; width: 100%; vertical-align: top;"
+   ><div style="position: absolute; display: block; left: 0; width: 40%; border: 1px solid red;"
+       ><span style="background-color: rgba(180, 228, 133, 0.37); display: table-cell;"><span style="display: inline-block; width: 20px; height: 20px; background-color: red;"></span><span style="padding: 5px;">File Name File Name File Name File Name.png</span></span
+   ></div
+></div>
+</div>
+
+<div style="position: relative; display: block; width: 100%; height: 28px;">
+    <div style="position: absolute; display: block; left: 0; width: auto; border: 1px solid red;">
+        <span style="background-color: rgba(180, 228, 133, 0.37); display: table-cell;"><span style="display: inline-block; width: 20px; height: 20px; background-color: red;"></span><span style="padding: 5px;">File Name 123.png</span></span>
+    </div>
+    <div style=""></div>
+</div>
+
+<!--
+    
+<div class="Example InlineBlock ContainerBase">
+    <div class="Example InlineBlock ContainerItem">123</div>
+    <div class="Example InlineBlock ContainerItem">456</div>
+    <div class="Example InlineBlock ContainerItem">789</div>
+</div>
+
+-->
+
+<div class="ContainerBase">
+<div class="FloatLeftBlock ContainerParent">
+    <div class="Example1 FloatLeftBlock ContainerItem">ABC</div>
+    <div class="Example1 FloatLeftBlock ContainerItem">
+
+        <div class="InlineBlock ContainerParent">
+            <div class="Example2 InlineBlock ContainerItem">123</div>
+            <div class="Example2 InlineBlock ContainerItem">456</div>
+            <div class="Example2 InlineBlock ContainerItem">789</div>
+        </div>
+
+        <div class="FloatLeftBlock ContainerParent">
+            <div class="Example1 FloatLeftBlock ContainerItem">АБВ</div>
+            <div class="Example1 FloatLeftBlock ContainerItem">
+
+                <div class="InlineBlock ContainerParent">
+                    <div class="Example3 InlineBlock ContainerItem">123</div>
+                    <div class="Example3 InlineBlock ContainerItem">456</div>
+                    <div class="Example3 InlineBlock ContainerItem">789</div>
+                </div>
+
+            </div>
+            <div class="Example1 FloatLeftBlock ContainerItem">ЖЗИ</div>
+            <div class="FloatClearFix"></div>
+        </div>
+    </div>
+    <div class="Example1 FloatLeftBlock ContainerItem">GHI</div>
+    <div class="FloatClearFix"></div>
+</div>
+</div>
+
+
+
+</body>
+</html>
