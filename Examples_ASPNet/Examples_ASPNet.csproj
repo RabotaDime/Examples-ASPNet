@@ -133,8 +133,14 @@
     <Content Include="Content\i\file-manager\icon-3-tree-arrow-closed.png" />
     <Content Include="Content\i\file-manager\icon-4-file-other.png" />
     <Content Include="Content\i\file-manager\icon-5-file-image.png" />
-    <Content Include="Content\js\BackgroundWorker.js" />
-    <Content Include="Content\js\Utils.js" />
+    <Content Include="Content\js\background-worker.js" />
+    <Content Include="Content\js\file-manager-catalogue-request.js" />
+    <Content Include="Content\js\file-manager-filelist.js" />
+    <Content Include="Content\js\file-manager-filenode.js" />
+    <Content Include="Content\js\file-manager-filetree.js" />
+    <Content Include="Content\js\file-manager-pathbuilder.js" />
+    <Content Include="Content\js\file-manager.js" />
+    <Content Include="Content\js\utils.js" />
     <Content Include="Content\layout-div-utils.css" />
     <Content Include="Content\site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

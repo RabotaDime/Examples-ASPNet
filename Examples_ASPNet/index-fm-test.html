@@ -1,8 +1,44 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_FMLayout.cshtml";
-}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест</title>
+    <link href="content/site.css" rel="stylesheet" type="text/css" />
+    <link href="content/file-manager-misc.css" rel="stylesheet" type="text/css" />
+    <link href="content/file-manager-filelist.css" rel="stylesheet" type="text/css" />
+    <link href="content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="scripts/modernizr-2.6.2.js"></script>
+
+    <script src="content/js/utils.js"></script>
+    <script src="content/js/background-worker.js"></script>
+    <script src="content/js/file-manager-filenode.js"></script>
+    <script src="content/js/file-manager-pathbuilder.js"></script>
+    <script src="content/js/file-manager-catalogue-request.js"></script>
+    <script src="content/js/file-manager-filetree.js"></script>
+    <script src="content/js/file-manager-filelist.js"></script>
+    <script src="content/js/file-manager.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h2 class="navbar-brand MainTitle">Примеры проектов ASP.Net</h2>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<div class="container body-content">
+        
 
 <h1>Файловый менеджер</h1>
 
@@ -29,7 +65,6 @@
                         <div class="ClearFix"></div>
                     </div>
                 </td>
-                <td><button class="FMControl GoButton" onclick="GlobalTests.Chrome.CFileCatalogueRequest_Request1();">Go</button></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -327,3 +362,14 @@
     </div>
 </div>
 
+
+    <hr />
+    <footer>
+        <p>&copy; Test - My ASP.NET Application</p>
+    </footer>
+</div>
+
+    <script src="scripts/jquery-1.10.2.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+</body>
+</html>

@@ -155,7 +155,7 @@
 
 .FMControl_CDirTreeList.UpperContainer:hover > .FMControl_CDirTreeList.DirToggleIcon
 {
-    background-image: url('/Content/i/file-manager/icon-3-tree-arrow-closed.png');
+    background-image: url('i/file-manager/icon-3-tree-arrow-closed.png');
 }
 
 .FMControl_CDirTreeList.MiddleContainer
@@ -176,7 +176,7 @@
 
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url('/Content/i/file-manager/icon-2-tree-arrow-open.png');
+    background-image: url('i/file-manager/icon-2-tree-arrow-open.png');
 
     display: block;
     float: left;
@@ -198,7 +198,7 @@
 
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url('/Content/i/file-manager/icon-1-folder-normal.png');
+    background-image: url('i/file-manager/icon-1-folder-normal.png');
 
     display: block;
     float: left;
@@ -330,7 +330,7 @@
 
     background-repeat: no-repeat;
     background-position: center center;
-    background-image: url('/Content/i/file-manager/icon-1-folder-normal.png');
+    background-image: url('i/file-manager/icon-1-folder-normal.png');
 }
 
 .FMControl_CFileItem.Name

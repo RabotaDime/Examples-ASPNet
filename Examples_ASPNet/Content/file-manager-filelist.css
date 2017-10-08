@@ -108,7 +108,7 @@ hr.FMFileListHeader
 
     color: gray;
 /*
-    background-image: url('/Content/i/info-gradient-1.png');
+    background-image: url('i/info-gradient-1.png');
     background-position: left center;
     background-repeat: repeat-y;
 
@@ -126,7 +126,7 @@ hr.FMFileListHeader
 .FMFileList .FMFileListItem.Icon,
 .FMFileList .FMFileListHeader.Icon
 {
-    background-image: url('/Content/i/file-manager/icon-4-file-other.png');
+    background-image: url('i/file-manager/icon-4-file-other.png');
     background-position: center center;
     background-repeat: no-repeat;
     width: 22px;
