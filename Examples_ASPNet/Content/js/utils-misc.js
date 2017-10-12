@@ -1,4 +1,7 @@
 ﻿
+///================================================================================================
+
+
 
 function IsUndefined (aV)
 {
@@ -15,6 +18,13 @@ function ArrayLast (aArray)
     }
 
     return null;
+}
+
+
+
+function String_EndsWith (aText, aMask)
+{
+    return aText.indexOf(aMask, aText.length - aMask.length) !== -1;
 }
 
 

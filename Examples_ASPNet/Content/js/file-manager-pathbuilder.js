@@ -100,7 +100,7 @@ CFilePathBuilder.prototype.BuildFromString = function (aS)
 
 CChromeTests.prototype.CFilePathBuilder_Init1 = function ()
 {
-    var MyPathBuilder   = null;
+    var MyPathBuilder = null;
 
     MyPathBuilder = new CFilePathBuilder();
     MyPathBuilder.Constructor(EFilePathType.WindowsLFS);

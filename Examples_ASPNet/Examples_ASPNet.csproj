@@ -124,6 +124,8 @@
     <Content Include="App_Data\Payments_log.ldf">
       <DependentUpon>Payments.mdf</DependentUpon>
     </Content>
+    <Content Include="ASMX\FileMgr.asmx" />
+    <Content Include="ASMX\ImgPreview.asmx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\file-manager-filelist.css" />
@@ -140,7 +142,8 @@
     <Content Include="Content\js\file-manager-filetree.js" />
     <Content Include="Content\js\file-manager-pathbuilder.js" />
     <Content Include="Content\js\file-manager.js" />
-    <Content Include="Content\js\utils.js" />
+    <Content Include="Content\js\utils-misc.js" />
+    <Content Include="Content\js\utils-dom.js" />
     <Content Include="Content\layout-div-utils.css" />
     <Content Include="Content\site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -187,6 +190,14 @@
     <Content Include="App_Code\DBPayments\Payments.cs">
       <DependentUpon>Payments.dbml</DependentUpon>
     </Content>
+    <Compile Include="ASMX\FileMgr.asmx.cs">
+      <DependentUpon>FileMgr.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ASMX\ImgPreview.asmx.cs">
+      <DependentUpon>ImgPreview.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controllers\Shared\ViewUtils.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -200,7 +211,7 @@
     <Compile Include="Models\Bonus.cs">
       <DependentUpon>PaymentsDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CookbookModels.cs" />
+    <Compile Include="Models\DBCookbookModels.cs" />
     <Compile Include="Models\Department.cs">
       <DependentUpon>PaymentsDataModel.tt</DependentUpon>
     </Compile>
@@ -223,7 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PaymentsDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\PaymentsModels.cs" />
+    <Compile Include="Models\DBPaymentsModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +254,7 @@
     <Content Include="Views\DBPayments\DepartmentEdit.cshtml" />
     <Content Include="Views\Shared\_FMLayout.cshtml" />
     <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Views\FileManager\TestCSS.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -55,6 +55,10 @@
     float: left;
 
     width: 70%;
+
+    min-height: 452px;
+    max-height: 452px;
+    overflow-y: hidden;
 /*
     left: 25%;
     right: 0;
@@ -123,6 +127,8 @@
 .FMControlDirTree
 {
     overflow-y: scroll;
+    min-height: 450px;
+    max-height: 450px;
 }
 
 

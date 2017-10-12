@@ -118,13 +118,13 @@ namespace Examples_ASPNet.Controllers
 				join D in PaymentsData.Departments					///   Присоединяем данные об отделах, которые 
 					on E.DepartmentID equals D.DepartmentID			///      связаны с присоединенными выше сотрудниками. 
 				orderby D.Name, E.Name								///   Сортируем результаты по имени отдела + имени сотрудника. 
-				select												///   Выборка нужных данных из полученного набора записей. 
-					new EmployeeBonusInfo () {
-						EmployeeID		= E.EmployeeID,
-						EmployeeName	= E.Name,
-						DepartmentID	= D.DepartmentID,
-						DepartmentName	= D.Name,
-						BonusValue		= B.Value,	
+				select												///   Выбираем нужные данные: 
+					new EmployeeBonusInfo () {						
+						EmployeeID		= E.EmployeeID,				///     а) ИД-сотрудника 
+						EmployeeName	= E.Name,					///     б) имя сотрудника 
+						DepartmentID	= D.DepartmentID,			///		в) ИД-отдела 
+						DepartmentName	= D.Name,					///		г) название отдела 
+						BonusValue		= B.Value,					///     д) значение бонуса 
 					};
 
 			///    Выводим список данных о бонусах, отсортированных по отделам и по именам. 
@@ -143,25 +143,36 @@ namespace Examples_ASPNet.Controllers
 
         public PartialViewResult Partial_BonusesByDepartments_LINQ(/* decimal reportsum */)
         {
-			BonusesViewParams PageParams = new BonusesViewParams (Request);
+			BonusesViewParams PageParams = new BonusesViewParams (this.Request);
 
+			///   Сумма ограничения бонусов по отделам из запроса страницы. 
 			decimal param_ReportBonusSum = PageParams.ReportBonusSum.ParamValue;
 
+			///                                                                                    
+			///   Создаем описание первого запроса к данным. 									   
+			///   Мы будем использовать этот запрос ниже, внутри второго, основного запроса.       
+			///                                                                                    
+			///   Следует отметить, что LINQ не отправляет никакие запросы до тех пор, пока 	   
+			///   данные по нему не будут либо вызваны (например, в месте энумерации списка), 	   
+			///   либо полностью сформирован (если один запрос используется внутри другого). 	   
+			///                                                                                    
 			var Query1 =
-				from B in PaymentsData.Bonuses
-				join E in PaymentsData.Employees
-					on B.EmployeeID equals E.EmployeeID
-				join D in PaymentsData.Departments
-					on E.DepartmentID equals D.DepartmentID
-				group B by D.DepartmentID into GroupedData
-				let TotalBonusSum = GroupedData.Sum(x => x.Value)
-				where TotalBonusSum >= param_ReportBonusSum
-				select new
+				from B in PaymentsData.Bonuses						///   Собираем все записи о бонусах. 
+				join E in PaymentsData.Employees					///   Присоединяем данные о сотрудниках, которые 
+					on B.EmployeeID equals E.EmployeeID				///      связаны с этими бонусами. 
+				join D in PaymentsData.Departments					///	  А также присоединяем данные об отделах, которые 
+					on E.DepartmentID equals D.DepartmentID			///		 связаны с присоединенными только что сотрудниками. 
+				group B by D.DepartmentID into GroupedData			///	  Группируем выборку по отделам. 
+				let TotalBonusSum = GroupedData.Sum(x => x.Value)	///	  Создаем переменную и создаем для нее агрегатный запрос суммы. 
+				where TotalBonusSum >= param_ReportBonusSum			///	  Делаем выборку по полученному запросу. 
+				select new											///   Выбираем нужные данные: 
 				{
-					DepartmentID		= GroupedData.Key,
-					TotalBonusValue		= TotalBonusSum,
+					DepartmentID		= GroupedData.Key,			///     а) поле Идентификатора отдела 
+					TotalBonusValue		= TotalBonusSum,			///     б) и сумму бонусов по этому отделу 
 				};
 
+			///   Создаем второй основной комплексный запрос на основе первого. 				  
+			///   К данным по суммам бонусам нам нужно присоединить название отдела. 		      
 			IEnumerable<Models.DepartmentTotalBonusInfo> DepartmentBonusList =
 				from Q in Query1
 				join D in PaymentsData.Departments
@@ -172,7 +183,10 @@ namespace Examples_ASPNet.Controllers
 					TotalBonusValue		= Q.TotalBonusValue,
 				};
 
+			///   Передаем запрос. Обращение к базе данных произойдет *только* при первом обращении 
+			///   к списку энумерации. То есть, только внутри Вида. 
             return PartialView(DepartmentBonusList);
         }
     }
 }
+

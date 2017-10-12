@@ -1,4 +1,15 @@
 
+#FM_List_MainContainer
+{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 410px;
+    min-height: 410px;
+}
+
+
+
+
 .FMFileList
 {
     width: 99%;
@@ -137,6 +148,26 @@ hr.FMFileListHeader
 */
 }
 
+.FMFileList .FMFileListItem.FileIconUnknown
+{
+    background-image: none;
+}
+
+.FMFileList .FMFileListItem.FileIconDirectory
+{
+    background-image: url('i/file-manager/icon-1-folder-normal.png');
+}
+
+.FMFileList .FMFileListItem.FileIconFile
+{
+    background-image: url('i/file-manager/icon-4-file-other.png');
+}
+
+.FMFileList .FMFileListItem.FileIconPictureFile
+{
+    background-image: url('i/file-manager/icon-5-file-image.png');
+}
+
 
 
 .FMFileList .FMFileListItem.Name,
@@ -199,7 +230,7 @@ hr.FMFileListHeader
 .FMFileList .FMFileListItem.InfoSize,
 .FMFileList .FMFileListHeader.InfoSize
 {
-    width: 70px;
+    width: 90px;
     text-align: right;
 }
 

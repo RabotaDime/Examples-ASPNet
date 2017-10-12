@@ -26,17 +26,22 @@ function CFileCatalogueRequest ()
     this.Base = new CObject();
 }
 
-CFileCatalogueRequest.prototype.BackgroundWorker = null;
-CFileCatalogueRequest.prototype.CatalogueObjects = [];
+CFileCatalogueRequest.prototype.BackgroundWorker    = null;
+CFileCatalogueRequest.prototype.CatalogueObjects    = [];
+CFileCatalogueRequest.prototype.FileManager         = null;
 
 
 
-CFileCatalogueRequest.prototype.Constructor = function ()
+CFileCatalogueRequest.prototype.Constructor = function (aFileManager)
 {
+    if (aFileManager === undefined) aFileManager = null;
+
     this.BackgroundWorker = GlobalBackgroundWorker;
     this.BackgroundWorker.AttachParent(this);
 
     this.CatalogueObjects = [];
+
+    this.FileManager = aFileManager;
 }
 
 
@@ -52,9 +57,60 @@ CFileCatalogueRequest.prototype.WorkerResult = function (aSuccess, aInputData, a
 {
     if (aStatusCode === undefined) aStatusCode = 200;
 
-    //var JSONObject = JSON.parse(aInputData);
+    if ((! aSuccess) || (aStatusCode != 200))
+    {
+        alert("Ошибка запроса: " + aStatusCode);
+        return;
+    }
 
-    alert(aSuccess + "(" + aStatusCode + ") = [" + aInputData + "]");
+    var JSONObject = JSON.parse(aInputData);
+
+    //alert(aSuccess + "(" + aStatusCode + ") = [" + aInputData + "]");
+    //console.dir(JSONObject);
+
+    try
+    {
+        if (JSONObject.Catalogues.length > 0)
+        {
+            for (var CI = 0; CI < JSONObject.Catalogues.length; CI++)
+            {
+                var CatalogueJSON = JSONObject.Catalogues[CI];
+
+                var Catalogue = new CFileCatalogue();
+                Catalogue.Constructor(CatalogueJSON.Address);
+
+                for (var OI = 0; OI < CatalogueJSON.Objects.length; OI++)
+                {
+                    var FileNodeJSON = CatalogueJSON.Objects[OI];
+
+                    var FileNode = new CFileNode();
+                    //FileNode.Constructor(); /* TODO_1 ??? */ 
+
+                    FileNode.NodeName = FileNodeJSON.Name;
+                    FileNode.NodeType = FileNodeJSON.Type;
+
+                    FileNode.NodeData = {
+                        SizeInfo    : FileNodeJSON.SizeText,
+                        DateTime    : "01.01.2017&nbsp;12:34",
+                        Flags       : FileNodeJSON.Flags,
+                        Owner       : FileNodeJSON.Owner,
+                    };
+
+                    Catalogue.NodeList.push(FileNode);
+                }
+
+                this.FileManager.InputCatalogue(Catalogue /* CFileCatalogue */);
+            }
+        }
+    }
+    catch (E)
+    {
+        console.log ("Ошибка внесения данных в каталог.\n" + E);
+        alert       ("Ошибка внесения данных в каталог.\n" + E);
+    }
+    finally
+    {
+    }
 }
 
 

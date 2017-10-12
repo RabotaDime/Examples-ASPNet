@@ -9,6 +9,32 @@ using System.Web;
 
 namespace Examples_ASPNet
 {
+	public static class MyFileHelper
+	{
+		///   Текст-подсказка для размера файлов. 
+		public static String GetSizeHint (Int64 aSizeValue)
+		{
+			String[] ValueTypes = new String[] { "Байт", "КБ", "МБ", "ГБ", "ТБ", };
+
+			Int32 E = 1;
+			while (aSizeValue > Math.Pow(1024, E))
+			{
+				E++;
+				if (E >= ValueTypes.Length) break;
+			}
+
+			if (E == 1)
+				return String.Format("{0} {1}", aSizeValue, ValueTypes[E - 1]);
+			else
+			{
+				double V = aSizeValue / Math.Pow(1024, E - 1);
+				return String.Format("{0:0.00} {1}", V, ValueTypes[E - 1]);
+			}
+		}
+	}
+
+
+
 	public abstract class ViewParam<T>
 	{
 		public readonly String	ParamID;
@@ -224,6 +250,8 @@ namespace Examples_ASPNet.DBPayments
 
 
 
+	///   С помощью подобной структуры я привык обрабатывать и проверять на валидность 
+	///   данные, которые передаются в веб-запросе. 
 	public class BonusesViewParams : ViewParams
 	{
 		public BonusesViewParam		ViewType		= new BonusesViewParam	("viewtype", BonusesViewType.ForEmployees);

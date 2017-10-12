@@ -23,6 +23,8 @@ CFileNode.prototype.ChildNodes      = [];
 
 CFileNode.prototype.NodeName        = "UNDEFINED";
 CFileNode.prototype.NodeType        = EFileNodeType.Undefined;
+CFileNode.prototype.NodeData        = null;
+CFileNode.prototype.NodeDOMInfo     = null;
 
 
 
@@ -41,10 +43,89 @@ CFileNode.prototype.Constructor = function (aParentNode, aNodeName, aNodeType)
 
     this.NodeName        = aNodeName;
     this.NodeType        = aNodeType;
+    this.NodeData        = null;
+
+    this.NodeDOMInfo     = null;
+}
+
+CFileNode.prototype.FindChildLike = function (aLikeNode)
+{
+    if (IsUndefined(aLikeNode) || (aLikeNode == null)) return null;
+
+    ///   Потом создать хороший поиск по имени. А пока просто перебором.
+    for (var I = 0; I < this.ChildNodes.length; I++)
+    {
+        if (this.ChildNodes[I].IsEqual(aLikeNode))
+            return this.ChildNodes[I];
+    }
+
+    return null;
+}
+
+CFileNode.prototype.DropChilds = function ()
+{
+    this.ChildNodes = [];
+}
+
+CFileNode.prototype.IsEqual = function (aOtherNode)
+{
+    return (this.NodeName.localeCompare(aOtherNode.NodeName) == 0) &&
+           (this.NodeType == aOtherNode.NodeType);
+}
+
+CFileNode.prototype.Assign = function (aNode, aAssignPointers, aCopyChilds)
+{
+    if (aAssignPointers === undefined) aAssignPointers = false;
+    if (aCopyChilds     === undefined) aCopyChilds = false;
+
+    this.NodeName = aNode.NodeName;
+    this.NodeType = aNode.NodeType;
+    this.NodeData = aNode.NodeData;
+
+    if (aAssignPointers)
+    {
+        this.ParentNode     = aNode.ParentNode;
+        this.NextNode       = aNode.NextNode;
+        this.PrevNode       = aNode.PrevNode;
+    }
+    else
+    {
+        this.ParentNode     = null;
+        this.NextNode       = null;
+        this.PrevNode       = null;
+    }
+
+    if (aCopyChilds)
+    {
+        this.ChildNodes = aNode.ChildNodes;
+    }
+    else
+    {
+        this.ChildNodes = [];
+    }
+}
+
+CFileNode.prototype.GetFullAddress = function ()
+{
+    var ResultPath = this.NodeName;
+    var N = this.ParentNode;
+
+    while (N != null)
+    {
+        ResultPath = N.NodeName + "|" + ResultPath;
+        N = N.ParentNode;
+    }
+
+    return ResultPath;
 }
 
 CFileNode.prototype.AddChild = function (aNode)
 {
+    var PrevChild = (this.ChildNodes.length <= 0) ? null : this.ChildNodes[this.ChildNodes.length - 1];
+
+    aNode.PrevNode = PrevChild;
+    aNode.NextNode = null;
+
     this.ChildNodes.push(aNode);
 }
 
@@ -75,7 +156,8 @@ CFileNode.prototype.ConsolePrint = function (aLevel)
         Level--;
     }
 
-    console.log(LevelString + "Node:" + this.NodeType + " [" + this.NodeName + "]");
+    console.log(LevelString + "Node:" + this.NodeType + " [" + this.NodeName + "] " +
+        ((this.NodeData == null) ? "<no data>" : JSON.stringify(this.NodeData)));
 
     for (var I = 0; I < this.ChildNodes.length; I++)
         this.ChildNodes[I].ConsolePrint(aLevel + 1);
