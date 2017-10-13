@@ -168,6 +168,9 @@ CFileCatalogueRequest.prototype.RequestMutlipleForPath = function (aPath, aOrder
     {
         CatalogueAddress += N.NodeName + "|";
 
+        if (N.NextNode == null)
+            aTypes += ",File";
+
         JSONData.Catalogues.push(
         {
             Address: CatalogueAddress,
