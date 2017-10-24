@@ -1,4 +1,4 @@
-# ASPNet Examples
+# C# ASP.Net Примеры
 
 Простой набор примеров ASP.Net/MVC. Проект для Visual Studio 2015.
 
