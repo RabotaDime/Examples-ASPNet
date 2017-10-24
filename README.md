@@ -1,4 +1,4 @@
-# Примеры ASP.Net, C#  
+# Примеры ASP.Net / C# / JS
 
 Простой набор примеров ASP.Net/MVC. Проект для Visual Studio 2015.
 
