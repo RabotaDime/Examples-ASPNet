@@ -160,17 +160,17 @@ namespace Examples_ASPNet.Controllers
             //   либо полностью сформирован (если один запрос используется внутри другого).        
             //                                                                                    
             var Query1 =
-                from B in PaymentsData.Bonuses                        //   Собираем все записи о бонусах. 
+                from B in PaymentsData.Bonuses                      //   Собираем все записи о бонусах. 
                 join E in PaymentsData.Employees                    //   Присоединяем данные о сотрудниках, которые 
-                    on B.EmployeeID equals E.EmployeeID                //      связаны с этими бонусами. 
-                join D in PaymentsData.Departments                    //      А также присоединяем данные об отделах, которые 
-                    on E.DepartmentID equals D.DepartmentID            //         связаны с присоединенными только что сотрудниками. 
-                group B by D.DepartmentID into GroupedData            //      Группируем выборку по отделам. 
-                let TotalBonusSum = GroupedData.Sum(x => x.Value)    //      Создаем переменную и создаем для нее агрегатный запрос суммы. 
-                where TotalBonusSum >= param_ReportBonusSum            //      Делаем выборку по полученному запросу. 
-                select new                                            //   Выбираем нужные данные: 
+                    on B.EmployeeID equals E.EmployeeID             //      связаны с этими бонусами. 
+                join D in PaymentsData.Departments                  //      А также присоединяем данные об отделах, которые 
+                    on E.DepartmentID equals D.DepartmentID         //         связаны с присоединенными только что сотрудниками. 
+                group B by D.DepartmentID into GroupedData          //      Группируем выборку по отделам. 
+                let TotalBonusSum = GroupedData.Sum(x => x.Value)   //      Создаем переменную и создаем для нее агрегатный запрос суммы. 
+                where TotalBonusSum >= param_ReportBonusSum         //      Делаем выборку по полученному запросу. 
+                select new                                          //   Выбираем нужные данные: 
                 {
-                    DepartmentID        = GroupedData.Key,            //     а) поле Идентификатора отдела 
+                    DepartmentID        = GroupedData.Key,          //     а) поле Идентификатора отдела 
                     TotalBonusValue     = TotalBonusSum,            //     б) и сумму бонусов по этому отделу 
                 };
 
