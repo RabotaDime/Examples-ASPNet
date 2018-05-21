@@ -129,7 +129,7 @@ namespace Examples_ASPNet.Models
 					{
 						Type		= (int) EFileNodeType.File,
 						Name		= FileInfo.Name,
-									  ///  Размер файлов я пока передаю строкой. Так как в JSON нет полноценной поддержки Int64. 
+									  //  Размер файлов я пока передаю строкой. Так как в JSON нет полноценной поддержки Int64. 
 						SizeText	= MyFileHelper.GetSizeHint(FileInfo.Length),
 						Owner		= "ChuckNorris",
 						Flags		= (int) FileInfo.Attributes,

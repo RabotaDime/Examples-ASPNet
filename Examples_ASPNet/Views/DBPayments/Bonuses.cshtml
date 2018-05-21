@@ -5,7 +5,7 @@
     string LinkClass    = aIsActive ? "ActiveLink" : "DisabledLink";
     string LinkTag      = aIsActive ? "a" : "span";
 
-    ///   Создание кода ссылки. 
+    //   Создание кода ссылки. 
     @Html.Raw(String.Format
     (
         "<{0} href=\"{1}\" class=\"PaymentsTitleLink {2}\"><span>{3}</span></{0}>",
@@ -18,16 +18,16 @@
 
 
 @helper MakeTitleLink (BonusesViewParams aViewParams) {
-    ///   Создание кода переключаемых ссылок для заголовка страницы. 
+    //   Создание кода переключаемых ссылок для заголовка страницы. 
     @Html.Raw("<h1>Просмотр бонусов у&nbsp;")
     @MakeViewTypeLink(
         aViewParams.ViewType.ParamValue != BonusesViewType.ForEmployees,
         "сотрудников",
         "/dbpayments/bonuses/?" +
-            ///   Создаем параметр, указывающий на вывод информации для бонусов по сотрудникам. 
+            //   Создаем параметр, указывающий на вывод информации для бонусов по сотрудникам. 
             aViewParams.ViewType.MakeStringFor(BonusesViewType.ForEmployees) + "&" +
-			///   Для просмотра бонусов о сотрудниках этот параметр не нужен, но нам
-			///   важно сохранить его для пользователя. 
+			//   Для просмотра бонусов о сотрудниках этот параметр не нужен, но нам
+			//   важно сохранить его для пользователя. 
             aViewParams.ReportBonusSum.MakeString()
     )
     @Html.Raw(" и&nbsp;")
@@ -35,10 +35,10 @@
         aViewParams.ViewType.ParamValue != BonusesViewType.ByDepartments,
         "отделов",
         "/dbpayments/bonuses/?" +
-            ///   Создаем параметр, указывающий на вывод информации для всех отделов. 
+            //   Создаем параметр, указывающий на вывод информации для всех отделов. 
             aViewParams.ViewType        .MakeStringFor(BonusesViewType.ByDepartments) + "&" + 
-            ///   Далее добавляем параметр, указывающий уже введенную (текущую) сумму
-			///   для обрезки данных при выводе бонусов по всем отделам. 
+            //   Далее добавляем параметр, указывающий уже введенную (текущую) сумму
+			//   для обрезки данных при выводе бонусов по всем отделам. 
             aViewParams.ReportBonusSum  .MakeString()
     )
     @Html.Raw("</h1>")
@@ -49,8 +49,8 @@
     ViewBag.Title = "Просмотр бонусов у сотрудников и отделов";
 
 
-    ///   Получаем параметры страницы [ViewType], [ReportSum].
-    ///   Для обработки параметров я написал небольшой набор вспомогательных классов, потому что мне так привычнее.
+    //   Получаем параметры страницы [ViewType], [ReportSum].
+    //   Для обработки параметров я написал небольшой набор вспомогательных классов, потому что мне так привычнее.
     BonusesViewParams ThisViewParams = new BonusesViewParams(Request);
 }
 
