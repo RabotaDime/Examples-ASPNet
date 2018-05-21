@@ -115,19 +115,19 @@ namespace Examples_ASPNet.Controllers
         public PartialViewResult Partial_BonusesForEmployees_LINQ()
         {
             IEnumerable<Models.EmployeeBonusInfo> EmployeesBonusesList =
-                from B in PaymentsData.Bonuses                        //   Собираем все записи о бонусах. 
-                join E in PaymentsData.Employees                    //   Присоединяем данные о сотрудниках, которые 
-                    on B.EmployeeID equals E.EmployeeID                //      связаны с перечисленными бонусами. 
-                join D in PaymentsData.Departments                    //   Присоединяем данные об отделах, которые 
-                    on E.DepartmentID equals D.DepartmentID            //      связаны с присоединенными выше сотрудниками. 
-                orderby D.Name, E.Name                                //   Сортируем результаты по имени отдела + имени сотрудника. 
-                select                                                //   Выбираем нужные данные: 
+                from B in PaymentsData.Bonuses                  //   Собираем все записи о бонусах. 
+                join E in PaymentsData.Employees                //   Присоединяем данные о сотрудниках, которые 
+                    on B.EmployeeID equals E.EmployeeID         //      связаны с перечисленными бонусами. 
+                join D in PaymentsData.Departments              //   Присоединяем данные об отделах, которые 
+                    on E.DepartmentID equals D.DepartmentID     //      связаны с присоединенными выше сотрудниками. 
+                orderby D.Name, E.Name                          //   Сортируем результаты по имени отдела + имени сотрудника. 
+                select                                          //   Выбираем нужные данные: 
                     new EmployeeBonusInfo () {                        
-                        EmployeeID        = E.EmployeeID,                //     а) ИД-сотрудника 
-                        EmployeeName    = E.Name,                    //     б) имя сотрудника 
-                        DepartmentID    = D.DepartmentID,            //        в) ИД-отдела 
-                        DepartmentName    = D.Name,                    //        г) название отдела 
-                        BonusValue        = B.Value,                    //     д) значение бонуса 
+                        EmployeeID      = E.EmployeeID,         //     а) ИД-сотрудника 
+                        EmployeeName    = E.Name,               //     б) имя сотрудника 
+                        DepartmentID    = D.DepartmentID,       //        в) ИД-отдела 
+                        DepartmentName  = D.Name,               //        г) название отдела 
+                        BonusValue      = B.Value,              //     д) значение бонуса 
                     };
 
             //    Выводим список данных о бонусах, отсортированных по отделам и по именам. 
@@ -171,7 +171,7 @@ namespace Examples_ASPNet.Controllers
                 select new                                            //   Выбираем нужные данные: 
                 {
                     DepartmentID        = GroupedData.Key,            //     а) поле Идентификатора отдела 
-                    TotalBonusValue        = TotalBonusSum,            //     б) и сумму бонусов по этому отделу 
+                    TotalBonusValue     = TotalBonusSum,            //     б) и сумму бонусов по этому отделу 
                 };
 
             //   Создаем второй основной комплексный запрос на основе первого.                   
@@ -182,8 +182,8 @@ namespace Examples_ASPNet.Controllers
                     on Q.DepartmentID equals D.DepartmentID
                 select new Models.DepartmentTotalBonusInfo {
                     DepartmentID        = Q.DepartmentID,
-                    DepartmentName        = D.Name,
-                    TotalBonusValue        = Q.TotalBonusValue,
+                    DepartmentName      = D.Name,
+                    TotalBonusValue     = Q.TotalBonusValue,
                 };
 
             //   Передаем запрос. Обращение к базе данных произойдет *только* при первом обращении 
