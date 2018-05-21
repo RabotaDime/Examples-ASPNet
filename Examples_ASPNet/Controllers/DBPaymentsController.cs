@@ -41,8 +41,9 @@ namespace Examples_ASPNet.Controllers
 
 		public PartialViewResult Partial_EmployeesByDepartments ()
 		{
-			Hashtable DepartmentGroups = new Hashtable();
-			Hashtable DepartmentsNames = new Hashtable();
+			var DepartmentGroups = new Dictionary<int, List<Models.Employee>> ();
+            var DepartmentsNames = new Dictionary<int, string> ();
+
 			List<int> DepartmentsOrderedByNames = new List<int> ();
 
 			///   Выборка всех отделов, по алфавиту. 
@@ -72,8 +73,11 @@ namespace Examples_ASPNet.Controllers
 			///   Заполнение ассоциативного массива сотрудников по отделам. 
 			foreach (Models.Employee E in EmployeesList)
 			{
-				var AssocDepartmentList = (List<Models.Employee>) DepartmentGroups[E.DepartmentID];
-				AssocDepartmentList.Add(E);
+                if (E.DepartmentID.HasValue)
+                {
+                    var AssocDepartmentList = DepartmentGroups[E.DepartmentID.Value];
+                    AssocDepartmentList.Add(E);
+                }
 			}
 
 			///   Дополнительный список сотрудников, которые не привязаны ни к какому отделу. 

@@ -8,8 +8,9 @@ namespace Examples_ASPNet.Models
 {
 	public class DepartmentsListOfEmployees
 	{
-		public Hashtable	DepartmentsArray;
-		public Hashtable	DepartmentsNames;
+		public Dictionary<int, List<Models.Employee>>   DepartmentsArray;
+		public Dictionary<int, string>                  DepartmentsNames;
+
 		public List<int>	DepartmentsOrderedByNames;
 		public int			EmployeesTotalCount;
 
