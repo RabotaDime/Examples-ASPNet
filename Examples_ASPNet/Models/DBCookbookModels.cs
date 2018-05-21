@@ -5,19 +5,19 @@ using System.Web;
 
 namespace Examples_ASPNet.Models
 {
-	public class Recipe
-	{
-	}
+    public class Recipe
+    {
+    }
 
 
 
-	public class Ingredient
-	{
-	}
+    public class Ingredient
+    {
+    }
 
 
 
-	public class AssocRecipeIngredient
-	{
-	}
+    public class AssocRecipeIngredient
+    {
+    }
 }

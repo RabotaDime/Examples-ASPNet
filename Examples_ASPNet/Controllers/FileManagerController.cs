@@ -24,37 +24,37 @@ namespace Examples_ASPNet.Controllers
 
 
 
-		[HttpPost]
-		public ActionResult List_WinLFS(CatalogueRequest model)
-		{
-			if ((model == null) || (model.Catalogues == null) || (model.Catalogues.Count <= 0))
-			{
-				return Json(new { StatusInfo = "Invalid or empty request.", StatusCode = -1 });
-			}
+        [HttpPost]
+        public ActionResult List_WinLFS(CatalogueRequest model)
+        {
+            if ((model == null) || (model.Catalogues == null) || (model.Catalogues.Count <= 0))
+            {
+                return Json(new { StatusInfo = "Invalid or empty request.", StatusCode = -1 });
+            }
 
-			CatalogueResponse Response = new CatalogueResponse();
+            CatalogueResponse Response = new CatalogueResponse();
 
-			Int32 ResultStatusCode = 1;
+            Int32 ResultStatusCode = 1;
 
-			foreach (CatalogueRequestData C in model.Catalogues)
-			{
-				CatalogueResult CatalogResult = new CatalogueResult(C);
+            foreach (CatalogueRequestData C in model.Catalogues)
+            {
+                CatalogueResult CatalogResult = new CatalogueResult(C);
 
-				///   Выполняем получение результата по каталогу. 
-				Int32 StatusCode = CatalogResult.Execute();
+                ///   Выполняем получение результата по каталогу. 
+                Int32 StatusCode = CatalogResult.Execute();
 
-				if (StatusCode != 1) ResultStatusCode = StatusCode;
+                if (StatusCode != 1) ResultStatusCode = StatusCode;
 
-				///   Добавляю каталог в результат. 
-				Response.Catalogues.Add(CatalogResult);
-			}
+                ///   Добавляю каталог в результат. 
+                Response.Catalogues.Add(CatalogResult);
+            }
 
-			Response.StatusInfo = "Success";
-			Response.StatusCode = ResultStatusCode;
+            Response.StatusInfo = "Success";
+            Response.StatusCode = ResultStatusCode;
 
-			//return Json(new int[5] {1, 2, 3, 4, 5});
-			return Json(Response);
-		}
+            //return Json(new int[5] {1, 2, 3, 4, 5});
+            return Json(Response);
+        }
     }
 }
 
