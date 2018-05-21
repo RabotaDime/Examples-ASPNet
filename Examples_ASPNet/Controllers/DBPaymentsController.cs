@@ -88,11 +88,11 @@ namespace Examples_ASPNet.Controllers
 
             return PartialView (new DepartmentsListOfEmployees()
             {
-                DepartmentsOrderedByNames    = DepartmentsOrderedByNames,
+                DepartmentsOrderedByNames   = DepartmentsOrderedByNames,
                 DepartmentsArray            = DepartmentGroups,
                 DepartmentsNames            = DepartmentsNames,
-                EmployeesTotalCount            = EmployeesList.Count() + NullDepEmployees.Count(),
-                EmployeesWithoutDepartment    = NullDepEmployees.ToList(),
+                EmployeesTotalCount         = EmployeesList.Count() + NullDepEmployees.Count(),
+                EmployeesWithoutDepartment  = NullDepEmployees.ToList(),
             });
         }
 
